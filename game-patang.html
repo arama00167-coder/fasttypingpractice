@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patang Baazi — Original Kite Typing Game | Fast Typing Practice</title>
+<meta name="description" content="Patang Baazi: the original kite-fighting typing game. Type words to cut rival kites — Wo Kaata! Free to play, only on Fast Typing Practice.">
+<link rel="canonical" href="https://fasttypingpractice.vercel.app/game-patang.html">
+<meta property="og:title" content="Patang Baazi — Original Kite Typing Game | Fast Typing Practice">
+<meta property="og:description" content="Patang Baazi: the original kite-fighting typing game. Type words to cut rival kites — Wo Kaata! Free to play, only on Fast Typing Practice.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://fasttypingpractice.vercel.app/game-patang.html">
+<meta name="theme-color" content="#10142B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310142B'/%3E%3Cg fill='%232EE6A8'%3E%3Crect x='10' y='18' width='10' height='8' rx='2'/%3E%3Crect x='23' y='18' width='10' height='8' rx='2'/%3E%3Crect x='36' y='18' width='10' height='8' rx='2'/%3E%3Crect x='10' y='30' width='10' height='8' rx='2'/%3E%3Crect x='23' y='30' width='18' height='8' rx='2'/%3E%3Crect x='44' y='30' width='10' height='8' rx='2'/%3E%3Crect x='17' y='42' width='30' height='8' rx='2'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#10142B;--panel:#171C38;--panel2:#1D2347;--b1:#262C52;--b2:#39406E;--txt:#EDF0FF;--mut:#8A90B8;--mint:#2EE6A8;--coral:#FF6B81;--vio:#8B7CFF;--amber:#F4B400}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.6}
+a{color:var(--mint);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+header.site{position:sticky;top:0;z-index:50;background:rgba(16,20,43,.92);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--b1)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+.logo{font-size:21px;font-weight:800;color:var(--txt);letter-spacing:.2px}
+.logo b{color:var(--mint);font-weight:800}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap}
+.navlinks a{color:#C6CBEE;font-size:14.5px;padding:7px 11px;border-radius:10px}
+.navlinks a:hover{background:var(--panel);color:var(--mint)}
+.hero{padding:36px 0 8px;text-align:center}
+.hero h1{font-size:clamp(27px,5vw,42px);line-height:1.2;font-weight:800}
+.hero h1 .m{color:var(--mint)}
+.hero p{color:var(--mut);max-width:640px;margin:12px auto 0;font-size:16.5px}
+.card{background:var(--panel);border:1.5px solid var(--b1);border-radius:18px;padding:20px}
+.btn{display:inline-block;background:var(--mint);color:#0B0E20;font-weight:800;font-size:15px;padding:12px 24px;border-radius:13px;border:none;cursor:pointer;box-shadow:0 4px 0 #159A6C,0 8px 18px rgba(46,230,168,.25);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #159A6C}
+.btn.ghost{background:transparent;color:#C6CBEE;border:1.5px solid var(--b2);box-shadow:0 4px 0 #20264A}
+.btn.ghost:active{box-shadow:0 1px 0 #20264A}
+.btn.vio{background:var(--vio);color:#0B0E20;box-shadow:0 4px 0 #5B4BC4,0 8px 18px rgba(139,124,255,.25)}
+.btn.vio:active{box-shadow:0 1px 0 #5B4BC4}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--panel2);border:1.5px solid var(--b2);color:#C6CBEE;font-size:13.5px;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--mint);color:#0B0E20;border-color:var(--mint)}
+.chip.vio.on{background:var(--vio);border-color:var(--vio)}
+select,input[type=text]{background:var(--panel2);border:1.5px solid var(--b2);color:var(--txt);border-radius:11px;padding:10px 12px;font-size:15px;font-family:inherit}
+label.fl{font-size:12px;font-weight:700;color:var(--mut);display:block;margin-bottom:5px;letter-spacing:.4px}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px}
+.typebox{background:var(--panel);border:1.5px solid var(--b1);border-radius:18px;padding:22px;cursor:text;position:relative}
+.typebox:focus-within{border-color:var(--vio)}
+#ttext,#ltext,#ptext,#jtext{font-size:clamp(19px,2.6vw,23px);line-height:1.9;font-family:ui-monospace,'Courier New',monospace;word-break:break-word;user-select:none}
+#ttext .u,#ltext .u,#ptext .u,#jtext .u{color:var(--mut)}
+#ttext .c,#ltext .c,#ptext .c,#jtext .c{color:var(--mint)}
+#ttext .w,#ltext .w,#ptext .w,#jtext .w{color:var(--coral);text-decoration:underline}
+#ttext .cur,#ltext .cur,#ptext .cur,#jtext .cur{background:var(--vio);color:#0B0E20;border-radius:4px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{background:rgba(139,124,255,.45)}}
+.hiddeninput{position:absolute;opacity:0;pointer-events:none;height:1px;width:1px}
+.hint{color:var(--vio);font-size:13.5px;margin-top:10px;font-weight:700}
+.stats{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.stat{flex:1;min-width:100px;background:var(--panel);border:1.5px solid var(--b1);border-radius:14px;padding:10px 16px}
+.stat .lab{font-size:11px;color:var(--mut);font-weight:700;letter-spacing:.5px}
+.stat .val{font-size:26px;font-weight:800}
+.stat .val.mint{color:var(--mint)}
+.result{display:none;margin-top:18px;background:var(--panel);border:1.5px solid var(--mint);border-radius:18px;padding:22px;box-shadow:0 0 24px rgba(46,230,168,.15)}
+.result.show{display:block;animation:pop .35s ease}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+.result h2{font-size:24px;margin-bottom:4px}
+.mot{background:var(--panel2);border:1.5px solid var(--b1);border-radius:12px;padding:12px 14px;margin:12px 0;color:#DDE3FF}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+section{padding:30px 0 6px}
+h2.sec{font-size:24px;margin-bottom:6px}
+p.sub{color:var(--mut);margin-bottom:16px}
+.gcard{background:var(--panel);border:1.5px solid var(--b1);border-radius:18px;padding:20px;display:block;color:var(--txt)}
+.gcard:hover{border-color:var(--mint)}
+.gcard h3{font-size:18px;margin-bottom:6px}
+.gcard p{color:var(--mut);font-size:14.5px}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;background:rgba(46,230,168,.15);color:var(--mint);margin-bottom:8px}
+.tag.v{background:rgba(139,124,255,.18);color:#BDB2FF}
+.tag.a{background:rgba(244,180,0,.16);color:var(--amber)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:9px 12px;border-bottom:1.5px solid var(--b1);text-align:left}
+th{color:var(--mut);font-size:12.5px;letter-spacing:.4px}
+.trust{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px 0 4px}
+.trust span{border:1.5px solid var(--b2);border-radius:999px;padding:7px 16px;font-size:13.5px;font-weight:700;color:#C6CBEE}
+details{background:var(--panel);border:1.5px solid var(--b1);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--mut);margin-top:8px}
+footer.site{border-top:1.5px solid var(--b1);margin-top:44px;padding:26px 0 34px;color:var(--mut);font-size:14px}
+footer.site a{color:#C6CBEE}
+.kbd{display:flex;flex-direction:column;gap:6px;align-items:center;margin-top:16px}
+.krow{display:flex;gap:5px;justify-content:center;flex-wrap:nowrap}
+.key{width:34px;height:38px;border-radius:8px;background:var(--panel2);border:1.5px solid var(--b2);border-bottom-width:4px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#C6CBEE;text-transform:uppercase}
+.key.wide{width:52px}.key.space{width:200px}
+.key.next{outline:3px solid #fff;transform:scale(1.12)}
+.key[data-f="1"]{border-color:#2EE6A8}.key[data-f="2"]{border-color:#8B7CFF}.key[data-f="3"]{border-color:#F4B400}.key[data-f="4"]{border-color:#FF6B81}.key[data-f="5"]{border-color:#4CC3FF}
+.banner{display:none;background:rgba(139,124,255,.16);border:1.5px solid var(--vio);border-radius:14px;padding:13px 16px;margin-bottom:14px;font-weight:700}
+.banner.show{display:block}
+.sky{position:relative;height:340px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1B2350 0%,#232B5E 55%,#2A3168 100%);border:1.5px solid var(--b1)}
+.cloud{position:absolute;background:rgba(237,240,255,.10);border-radius:999px;height:22px}
+.kite{position:absolute;font-size:44px;transition:left .3s,top .3s;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+.kiteword{position:absolute;background:var(--panel);border:1.5px solid var(--mint);color:var(--txt);border-radius:10px;padding:4px 12px;font-family:ui-monospace,monospace;font-size:18px;font-weight:700;transform:translate(-50%,-50%)}
+.kiteword .c{color:var(--mint)}.kiteword .w{color:var(--coral)}
+.cutmsg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:clamp(34px,7vw,58px);font-weight:900;color:var(--mint);text-shadow:0 4px 24px rgba(46,230,168,.5);z-index:5}
+.cutmsg.show{display:flex;animation:pop .3s ease}
+.pitch{position:relative;height:300px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#14342A 0%,#17452F 70%,#1B4D33 100%);border:1.5px solid var(--b1)}
+.stripes{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 60px,transparent 60px 120px)}
+.ballword{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:var(--panel);border:1.5px solid var(--mint);border-radius:12px;padding:10px 20px;font-family:ui-monospace,monospace;font-size:clamp(18px,3vw,24px);font-weight:700;z-index:3}
+.ballword .c{color:var(--mint)}.ballword .w{color:var(--coral)}
+.ball{position:absolute;font-size:26px;z-index:2;transition:left .45s ease-in,top .45s ease-in}
+.commentary{min-height:30px;font-weight:800;color:var(--amber);font-size:17px}
+.bigword{font-size:clamp(38px,8vw,64px);font-weight:900;letter-spacing:2px;text-align:center;padding:26px 0;font-family:ui-monospace,monospace}
+.hearts{font-size:20px;letter-spacing:3px}
+ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
+.small{font-size:13.5px;color:var(--mut)}
+.center{text-align:center}
+@media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}}
+</style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
+<div class="hero"><h1>🪁 Patang <span class="m">Baazi</span></h1><p>Type the word on the rival kite before it reaches yours to cut its string. Three strings — lose them all and the game ends. Words get longer, time gets shorter!</p></div>
+<div class="stats" style="margin-bottom:12px"><div class="stat"><div class="lab">SCORE</div><div class="val mint" id="pscore">0</div></div><div class="stat"><div class="lab">KITES CUT</div><div class="val" id="pcuts">0</div></div><div class="stat"><div class="lab">YOUR STRINGS</div><div class="val hearts" id="hearts">🪁🪁🪁</div></div><div class="stat"><div class="lab">&nbsp;</div><button class="btn" id="start">▶ Start Game</button></div></div>
+<div class="sky">
+<div class="cloud" style="width:120px;top:36px;left:8%"></div><div class="cloud" style="width:90px;top:90px;left:62%"></div><div class="cloud" style="width:150px;top:230px;left:30%"></div>
+<div class="kite" id="ownkite" style="left:6%;bottom:26px">🪁</div>
+<div class="kite" id="rival" style="display:none">🪁</div>
+<div class="kiteword" id="rword" style="display:none"></div>
+<div class="cutmsg" id="cutmsg"></div>
+</div>
+<div style="margin-top:14px"><label class="fl">TYPE THE WORD HERE</label><input id="gin" type="text" disabled autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:100%;font-size:20px" placeholder="Press Start, then type the word on the kite…"></div>
+<div class="result" id="gres"></div>
+<section><h2 class="sec">How to Play</h2><div class="card"><ul class="tips">
+<li>A rival kite flies in carrying a word. Type the word fully and correctly before the kite reaches you.</li>
+<li>Cut it and you hear the Basant cry — <b>Wo Kaata!</b> — plus points for every letter.</li>
+<li>Run out of time and the rival cuts one of your 3 strings. Lose all 3 and the sky goes quiet.</li>
+<li>One spelling mistake? No problem — the word restarts, but the kite keeps coming…</li></ul></div></section><script>
+const $=id=>document.getElementById(id);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function renderTyped(el,text,typed){let h='';for(let i=0;i<text.length;i++){const ch=text[i];let cls='u';if(i<typed.length)cls=(typed[i]===ch)?'c':'w';if(i===typed.length)cls+=' cur';h+='<span class="'+cls+'">'+esc(ch)+'</span>';}if(typed.length>=text.length)h+='<span class="cur">&nbsp;</span>';el.innerHTML=h;}
+function levelFor(w){if(w<25)return'Beginner';if(w<40)return'Average';if(w<60)return'Fast';if(w<80)return'Pro';return'Expert';}
+function motivation(wpm,acc){if(wpm<20)return{band:'low',msg:"Don't worry at all — every fast typist started exactly where you are now. This first step is the hardest one, and you have taken it. Type just 10 minutes a day and in one month you will surprise yourself."};if(wpm<40)return{band:'mid',msg:"Very good! You are already past the halfway mark. A little more daily practice and you will reach the next level soon. Keep going — your fingers are learning faster than you think."};return{band:'high',msg:"Outstanding! You are among the fast typists now. Job-test targets are well within your reach — set your next goal a little higher and go for it."};}
+function tipFor(acc,weak){if(acc<95)return"Your tip: slow down just a little and aim for accuracy first. Speed grows on its own when your fingers stop making mistakes.";if(weak&&weak.length)return"Your tip: the key '"+weak[0].k+"' gave you the most trouble today. Spend two minutes typing words with that letter and watch your speed jump.";return"Your tip: look at the screen, not the keyboard, and keep a steady rhythm. Smooth and steady beats fast and messy.";}
+function makeCert(name,wpm,acc,level){const c=document.createElement('canvas');c.width=1200;c.height=800;const x=c.getContext('2d');x.fillStyle='#10142B';x.fillRect(0,0,1200,800);x.strokeStyle='#2EE6A8';x.lineWidth=10;x.strokeRect(30,30,1140,740);x.strokeStyle='#8B7CFF';x.lineWidth=3;x.strokeRect(52,52,1096,696);x.fillStyle='#2EE6A8';x.textAlign='center';x.font='800 44px system-ui,Arial';x.fillText('Fast Typing Practice',600,140);x.fillStyle='#8A90B8';x.font='600 26px system-ui,Arial';x.fillText('CERTIFICATE OF TYPING SPEED',600,195);x.fillStyle='#EDF0FF';x.font='700 30px system-ui,Arial';x.fillText('This certificate is proudly presented to',600,300);x.fillStyle='#2EE6A8';x.font='900 64px system-ui,Arial';x.fillText(name||'Typing Star',600,385);x.fillStyle='#EDF0FF';x.font='700 34px system-ui,Arial';x.fillText('Typing Speed: '+wpm+' WPM',600,485);x.font='600 30px system-ui,Arial';x.fillText('Accuracy: '+acc+'%    Level: '+level,600,545);x.fillStyle='#8A90B8';x.font='500 24px system-ui,Arial';x.fillText('Awarded on '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),600,650);x.fillText('fasttypingpractice.vercel.app',600,695);const a=document.createElement('a');a.download='typing-certificate.png';a.href=c.toDataURL('image/png');a.click();}
+function wireCert(prefix,st){const b=$(prefix+'cert');if(!b)return;b.onclick=()=>{let n=prompt('Your name for the certificate:','');if(n===null)return;n=n.trim()||'Typing Star';makeCert(n,st.wpm,st.acc,st.level);};}
+function wireChallenge(prefix,st){const b=$(prefix+'chal');if(!b)return;b.onclick=()=>{const nm=st.playerName||prompt('Your name (for the challenge link):','')||'A friend';const link=location.origin+location.pathname.replace(/[^\/]*$/,'')+'index.html?challenge='+encodeURIComponent(nm)+':'+st.wpm;const done=()=>{const t=$(prefix+'chalnote');if(t)t.textContent='Challenge link copied — send it to a friend!';};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(done).catch(()=>{prompt('Copy your challenge link:',link);done();});}else{prompt('Copy your challenge link:',link);done();}};}
+
+const WORDS=['sky','kite','wind','string','cloud','fast','fly','high','sun','moon','star','blue','bird','tree','rain','storm','brave','swift','dance','glide','soar','drift','breeze','sunset','flying','festival','stringcut','patang','golden','battle','master','champion','basant','dor','pecha','guddi','thunder'];
+let score=0,cut=0,hearts=3,typedN=0,correctN=0,playing=false,cur=null,startT=0,deadline=0,raf=null,rivalX=0,round=0;
+function heartsShow(){$('hearts').textContent='🪁'.repeat(hearts)+'🤍'.repeat(Math.max(0,3-hearts));}
+function spawn(){round++;const pool=WORDS.filter(w=>round<4?w.length<=7:round<8?w.length<=12:true);const w=pick(pool);const tlimit=Math.max(3500,6500-w.length*180-round*120);cur={w,typed:'',t0:Date.now(),tl:tlimit};rivalX=88;$('rword').style.display='block';$('rival').style.display='block';position();renderWord();deadline=Date.now()+tlimit;}
+function position(){$('rival').style.left=rivalX+'%';$('rival').style.top=(14+((round*29)%38))+'%';$('rword').style.left=rivalX+'%';$('rword').style.top='calc('+(14+((round*29)%38))+'% + 62px)';}
+function renderWord(){let h='';for(let i=0;i<cur.w.length;i++){let cls='';if(i<cur.typed.length)cls=cur.typed[i]===cur.w[i]?'c':'w';h+='<span class="'+cls+'">'+esc(cur.w[i])+'</span>';}$('rword').innerHTML=h;}
+function loop(){if(!playing)return;const left=deadline-Date.now();rivalX=88-(1-Math.max(left,0)/ (cur.tl))*58;position();if(left<=0){rivalCut();return;}raf=requestAnimationFrame(loop);}
+function rivalCut(){hearts--;correctN+=0;heartsShow();flash('The rival kite cut your string! 💔');if(hearts<=0){gameOver();return;}setTimeout(spawn,700);raf=requestAnimationFrame(loop);}
+function flash(t){const m=$('cutmsg');m.textContent=t;m.classList.add('show');setTimeout(()=>m.classList.remove('show'),900);}
+function gameOver(){playing=false;cancelAnimationFrame(raf);const el=(Date.now()-startT)/60000;const wpm=el>0.02?Math.round((correctN/5)/el):0;const acc=typedN?Math.round(correctN/typedN*100):100;const m=motivation(wpm,acc);
+$('gres').innerHTML='<h2>Game Over — Final Score: '+score+'</h2><div class="stats"><div class="stat"><div class="lab">KITES CUT</div><div class="val mint">'+cut+'</div></div><div class="stat"><div class="lab">ACCURACY</div><div class="val">'+acc+'%</div></div><div class="stat"><div class="lab">EST. WPM</div><div class="val">'+wpm+'</div></div></div><div class="mot"><b>💚</b> '+(cut>=10?'Sky champion! Your patang ruled the whole sky today.':cut>=5?'Great flying — you cut '+cut+' kites! A few more rounds and the sky is yours.':'Good first flight! Every patang master started by losing a few strings. Try again — your hands already know the way.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button></div>';$('gres').classList.add('show');$('gres').scrollIntoView({behavior:'smooth',block:'center'});}
+function init(){$('start').onclick=()=>{$('start').style.display='none';$('gin').disabled=false;$('gin').focus();playing=true;startT=Date.now();heartsShow();spawn();loop();};
+$('gin').addEventListener('input',e=>{if(!playing||!cur)return;const v=e.target.value;e.target.value='';for(const ch of v){if(ch===' ')continue;typedN++;if(cur.typed.length<cur.w.length&&ch===cur.w[cur.typed.length]){correctN++;cur.typed+=ch;}else{cur.typed+=ch;}renderWord();if(cur.typed.length>=cur.w.length){const errs=cur.w.split('').filter((c,i)=>cur.typed[i]!==c).length;if(errs===0){score+=10+cur.w.length;cut++;$('pscore').textContent=score;$('pcuts').textContent=cut;flash('Wo Kaata! 🪁✂️');setTimeout(spawn,650);}else{flash('So close — watch the red letters!');cur.typed='';renderWord();}break;}}});}
+document.addEventListener('DOMContentLoaded',init);
+</script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a></p>
+<p style="margin-top:8px">Fast Typing Practice — free typing tests, lessons and games in 5 languages. No sign-up, ever. Your results are stored only in your own browser.</p>
+<p style="margin-top:6px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p></div></footer></body></html>
