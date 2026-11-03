@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Typing Practice — Untimed Practice with Weak-Key Report | Fast Typing Practice</title>
+<title>Free Typing Practice Online — Untimed Practice with Weak-Key Report | Fast Typing Practice</title>
 <meta name="description" content="Untimed typing practice with endless text, live WPM and accuracy, and a weak-keys report showing your 3 most-mistyped keys with a drill suggestion.">
 <link rel="canonical" href="https://fasttypingpractice.vercel.app/practice.html">
-<meta property="og:title" content="Free Typing Practice — Untimed Practice with Weak-Key Report | Fast Typing Practice">
+<meta property="og:title" content="Free Typing Practice Online — Untimed Practice with Weak-Key Report | Fast Typing Practice">
 <meta property="og:description" content="Untimed typing practice with endless text, live WPM and accuracy, and a weak-keys report showing your 3 most-mistyped keys with a drill suggestion.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://fasttypingpractice.vercel.app/practice.html">
 <meta name="theme-color" content="#10142B">
@@ -136,6 +136,6 @@ $('pfin').onclick=()=>{const{c,total}=counts();const el=startT?(Date.now()-start
 $('pres').innerHTML='<h2>Your Practice Report</h2><div class="stats"><div class="stat"><div class="lab">WPM</div><div class="val mint">'+wpm+'</div></div><div class="stat"><div class="lab">ACCURACY</div><div class="val">'+acc+'%</div></div><div class="stat"><div class="lab">CHARS TYPED</div><div class="val">'+total+'</div></div></div>'+(wk.length?'<p style="margin-top:12px">Your <b>3 weakest keys</b>: '+wk.map(x=>'<b style="color:var(--coral)">'+esc(x.k===' '?'space':x.k)+'</b> ('+x.n+' mistakes)').join(', ')+'</p><p class="small">Drill idea: open the <a href="lessons.html">lessons</a> and spend 3 minutes on words that use these letters. Weak keys are where your next 10 WPM is hiding.</p>':'<p style="margin-top:12px">No mistakes at all — flawless practice! Try a harder <a href="index.html">timed test</a> now.</p>')+'<div class="mot"><b>💚</b> '+m.msg+'</div><div class="mot"><b>💡</b> '+tipFor(acc,wk)+'</div>';
 $('pres').classList.add('show');$('pres').scrollIntoView({behavior:'smooth',block:'center'});};}
 document.addEventListener('DOMContentLoaded',init);
-</script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a></p>
+</script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>
 <p style="margin-top:8px">Fast Typing Practice — free typing tests, lessons and games in 5 languages. No sign-up, ever. Your results are stored only in your own browser.</p>
 <p style="margin-top:6px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p></div></footer></body></html>

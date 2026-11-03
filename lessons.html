@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Typing Lessons — Learn Touch Typing Step by Step | Fast Typing Practice</title>
+<title>Typing Lessons for Beginners — Learn Touch Typing Free | Fast Typing Practice</title>
 <meta name="description" content="Free typing lessons from the home row to full speed. 6 levels, 24 short lessons, on-screen keyboard with finger guides. Start super easy.">
 <link rel="canonical" href="https://fasttypingpractice.vercel.app/lessons.html">
-<meta property="og:title" content="Free Typing Lessons — Learn Touch Typing Step by Step | Fast Typing Practice">
+<meta property="og:title" content="Typing Lessons for Beginners — Learn Touch Typing Free | Fast Typing Practice">
 <meta property="og:description" content="Free typing lessons from the home row to full speed. 6 levels, 24 short lessons, on-screen keyboard with finger guides. Start super easy.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://fasttypingpractice.vercel.app/lessons.html">
 <meta name="theme-color" content="#10142B">
@@ -109,7 +109,7 @@ ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 .center{text-align:center}
 @media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}}
 </style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
-<div class="hero"><h1>Typing <span class="m">Lessons</span></h1><p>Easy first, harder later — and every lesson is open. Tap any lesson to begin. Your fingers will learn the rest.</p></div>
+<div class="hero"><h1>Free Typing Lessons for Beginners</h1><p>Easy first, harder later — and every lesson is open. Tap any lesson to begin. Your fingers will learn the rest.</p></div>
 <div class="card" id="lmenu" style="margin-bottom:16px"></div>
 <h2 id="ltitle" style="font-size:19px;margin-bottom:10px"></h2>
 <div class="typebox" id="lbox"><div id="ltext"></div><input class="hiddeninput" id="lin" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><div class="hint" id="lhint">👆 Click here, place your fingers on the home row, and type what you see</div></div>
@@ -149,6 +149,6 @@ $('lbox').addEventListener('click',()=>$('lin').focus());const inp=$('lin');
 inp.addEventListener('input',()=>{if(done)return;let v=inp.value;if(v.length>text.length)v=v.slice(0,text.length);for(let j=typed.length;j<v.length;j++){if(v[j]!==text[j]){const k=text[j];errMap[k]=(errMap[k]||0)+1;}}typed=v;if(!startT&&v.length>0)startT=Date.now();$('lhint').style.display='none';renderTyped($('ltext'),text,typed);markKey();upd();if(v.length>=text.length)finishLesson();});
 load(0);}
 document.addEventListener('DOMContentLoaded',init);
-</script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a></p>
+</script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>
 <p style="margin-top:8px">Fast Typing Practice — free typing tests, lessons and games in 5 languages. No sign-up, ever. Your results are stored only in your own browser.</p>
 <p style="margin-top:6px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p></div></footer></body></html>
