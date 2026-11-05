@@ -105,17 +105,19 @@ footer.site a{color:#C6CBEE}
 @keyframes zwob{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
 
 .spacefield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
-.gstage:fullscreen,.gstage:-webkit-full-screen{width:100%;height:100%;background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;overflow-y:auto}
-.gstage:fullscreen .spacefield,.gstage:fullscreen .zfield,.gstage:-webkit-full-screen .spacefield,.gstage:-webkit-full-screen .zfield{flex:1 1 auto;height:auto;min-height:0;max-height:none}
-.gstage:fullscreen .card,.gstage:-webkit-full-screen .card{flex:1 1 auto}
-.gstage:fullscreen .pship{width:165px}
-.gstage:fullscreen .bigword{font-size:clamp(48px,9vw,84px)}
-.gstage:fullscreen .stats,.gstage:-webkit-full-screen .stats{gap:7px;margin-top:8px}
-.gstage:fullscreen .stat,.gstage:-webkit-full-screen .stat{min-width:64px;padding:5px 10px;border-radius:11px}
-.gstage:fullscreen .stat .lab,.gstage:-webkit-full-screen .stat .lab{font-size:9.5px}
-.gstage:fullscreen .stat .val,.gstage:-webkit-full-screen .stat .val{font-size:17px}
-.gstage:fullscreen .hearts,.gstage:-webkit-full-screen .hearts{font-size:15px;letter-spacing:2px}
-.gstage:fullscreen .btn,.gstage:-webkit-full-screen .btn{font-size:13px;padding:8px 16px}
+.gstage:fullscreen,.gstage:-webkit-full-screen,.gstage.fsfake{width:100%;height:100%;background:var(--bg);margin:0;padding:10px 12px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto}
+.gstage.fsfake{position:fixed;inset:0;height:100dvh;z-index:9999}
+body.fslock{overflow:hidden}
+.gstage:fullscreen .spacefield,.gstage:fullscreen .zfield,.gstage:-webkit-full-screen .spacefield,.gstage:-webkit-full-screen .zfield,.gstage.fsfake .spacefield,.gstage.fsfake .zfield{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+.gstage:fullscreen .card,.gstage:-webkit-full-screen .card,.gstage.fsfake .card{flex:1 1 auto}
+.gstage:fullscreen .pship,.gstage.fsfake .pship{width:165px}
+.gstage:fullscreen .bigword,.gstage.fsfake .bigword{font-size:clamp(48px,9vw,84px)}
+.gstage:fullscreen .stats,.gstage:-webkit-full-screen .stats,.gstage.fsfake .stats{gap:7px;margin-top:8px}
+.gstage:fullscreen .stat,.gstage:-webkit-full-screen .stat,.gstage.fsfake .stat{min-width:64px;padding:5px 10px;border-radius:11px}
+.gstage:fullscreen .stat .lab,.gstage:-webkit-full-screen .stat .lab,.gstage.fsfake .stat .lab{font-size:9.5px}
+.gstage:fullscreen .stat .val,.gstage:-webkit-full-screen .stat .val,.gstage.fsfake .stat .val{font-size:17px}
+.gstage:fullscreen .hearts,.gstage:-webkit-full-screen .hearts,.gstage.fsfake .hearts{font-size:15px;letter-spacing:2px}
+.gstage:fullscreen .btn,.gstage:-webkit-full-screen .btn,.gstage.fsfake .btn{font-size:13px;padding:8px 16px}
 .star{position:absolute;background:#EDF0FF;border-radius:50%;opacity:.5}
 .ship{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
 .ship .eimg{display:block;width:68px;height:auto;margin:0 auto 1px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
@@ -178,7 +180,8 @@ function makeCert(name,wpm,acc,level){const c=document.createElement('canvas');c
 function wireCert(prefix,st){const b=$(prefix+'cert');if(!b)return;b.onclick=()=>{let n=prompt('Your name for the certificate:','');if(n===null)return;n=n.trim()||'Typing Star';makeCert(n,st.wpm,st.acc,st.level);};}
 function wireChallenge(prefix,st){const b=$(prefix+'chal');if(!b)return;b.onclick=()=>{const nm=st.playerName||prompt('Your name (for the challenge link):','')||'A friend';const link=location.origin+location.pathname.replace(/[^\/]*$/,'')+'index.html?challenge='+encodeURIComponent(nm)+':'+st.wpm;const done=()=>{const t=$(prefix+'chalnote');if(t)t.textContent='Challenge link copied — send it to a friend!';};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(done).catch(()=>{prompt('Copy your challenge link:',link);done();});}else{prompt('Copy your challenge link:',link);done();}};}
 
-function wireFS(btnId,stageId){const b=$(btnId),st=$(stageId);if(!b||!st)return;function isFS(){return document.fullscreenElement===st||document.webkitFullscreenElement===st;}function upd(){b.textContent=isFS()?'⛶ Exit Full Screen':'⛶ Full Screen';}b.onclick=function(){if(isFS()){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}else if(st.requestFullscreen){const p=st.requestFullscreen();if(p&&p.catch)p.catch(function(){});}else if(st.webkitRequestFullscreen){st.webkitRequestFullscreen();}};document.addEventListener('fullscreenchange',upd);document.addEventListener('webkitfullscreenchange',upd);upd();}
+function wireFS(btnId,stageId){const b=$(btnId),st=$(stageId);if(!b||!st)return;function isRealFS(){return document.fullscreenElement===st||document.webkitFullscreenElement===st;}function isFake(){return st.classList.contains('fsfake');}function isFS(){return isRealFS()||isFake();}function upd(){b.textContent=isFS()?'⛶ Exit Full Screen':'⛶ Full Screen';}function fake(){st.classList.add('fsfake');document.body.classList.add('fslock');upd();}function enterFS(){if(isFS())return;let done=false;try{if(st.requestFullscreen){const p=st.requestFullscreen();if(p&&p.catch)p.catch(function(){if(!isRealFS())fake();});done=true;}else if(st.webkitRequestFullscreen){st.webkitRequestFullscreen();done=true;}}catch(e){done=false;}if(!done)fake();}function exitFS(){if(isFake()){st.classList.remove('fsfake');document.body.classList.remove('fslock');upd();}else if(isRealFS()){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}}b.onclick=function(){if(isFS())exitFS();else enterFS();};document.addEventListener('fullscreenchange',upd);document.addEventListener('webkitfullscreenchange',upd);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isFake()&&!isRealFS())exitFS();});st._enterFS=enterFS;st._exitFS=exitFS;upd();}
+function enterStageFS(stageId){const st=$(stageId);if(st&&st._enterFS)st._enterFS();}
 
 const W1=['cat','sun','tree','book','fish','bird','milk','star','hand','rain'];
 const W2=['apple','tiger','house','water','happy','cloud','piano','green','smile','light'];
@@ -189,8 +192,8 @@ function showTime(){return Math.max(1200,3000-(round-1)*200);}
 function pool(){return round<=3?W1:round<=6?W2:round<=8?W3:W4;}
 function next(){round++;if(round>10){end();return;}$('rd').textContent=round;$('st').textContent=(showTime()/1000).toFixed(1)+'s';$('min').value='';$('min').disabled=true;$('feed').textContent='Memorise this word…';cur=pick(pool());$('big').textContent=cur;$('big').style.color='var(--txt)';phase='show';clearTimeout(timer1);timer1=setTimeout(()=>{$('big').textContent='• • • • •';$('feed').textContent='Now type the word from memory and press Enter:';$('min').disabled=false;$('min').focus();phase='type';},showTime());}
 function end(){phase='done';const rating=correctRounds>=9?'Photographic Memory!':correctRounds>=7?'Excellent Memory':correctRounds>=5?'Strong Memory':correctRounds>=3?'Growing Memory':'Memory in Training';const m=motivation(correctRounds*6,correctRounds*10);
-$('mres').innerHTML='<h2>Your Memory Score: '+score+'</h2><div class="stats"><div class="stat"><div class="lab">ROUNDS RIGHT</div><div class="val mint">'+correctRounds+' / 10</div></div><div class="stat"><div class="lab">MEMORY RATING</div><div class="val" style="font-size:19px">'+rating+'</div></div></div><div class="mot"><b>💚</b> '+(correctRounds>=7?'Superb! Your brain holds words like a camera. Memory plus typing is exactly what fast typists are made of.':'Nice game! Memory grows just like typing speed — a little daily play and those hidden words will start feeling easy.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button></div>';$('mres').classList.add('show');$('mres').scrollIntoView({behavior:'smooth',block:'center'});}
-function init(){wireFS('mfs','mstage');$('start').onclick=()=>{$('start').style.display='none';next();};
+$('mres').innerHTML='<h2>Your Memory Score: '+score+'</h2><div class="stats"><div class="stat"><div class="lab">ROUNDS RIGHT</div><div class="val mint">'+correctRounds+' / 10</div></div><div class="stat"><div class="lab">MEMORY RATING</div><div class="val" style="font-size:19px">'+rating+'</div></div></div><div class="mot"><b>💚</b> '+(correctRounds>=7?'Superb! Your brain holds words like a camera. Memory plus typing is exactly what fast typists are made of.':'Nice game! Memory grows just like typing speed — a little daily play and those hidden words will start feeling easy.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button></div>';$('mres').classList.add('show');setTimeout(()=>$('mres').scrollIntoView({behavior:'smooth',block:'nearest'}),80);}
+function init(){wireFS('mfs','mstage');$('start').onclick=()=>{enterStageFS('mstage');$('start').style.display='none';next();};
 $('min').addEventListener('keydown',e=>{if(e.key!=='Enter'||phase!=='type')return;const v=$('min').value.trim().toLowerCase();phase='check';if(v===cur.toLowerCase()){const pts=cur.length*2+(round>6?10:round>3?5:0);score+=pts;correctRounds++;$('sc').textContent=score;$('big').textContent='✅ '+cur;$('big').style.color='var(--mint)';$('feed').textContent='Correct! +'+pts+' points';}else{$('big').textContent=cur;$('big').style.color='var(--coral)';$('feed').textContent='Not quite — the word was "'+cur+'". Look carefully, it will stick next time.';}setTimeout(next,1500);});}
 document.addEventListener('DOMContentLoaded',init);
 </script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>
