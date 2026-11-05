@@ -89,17 +89,21 @@ footer.site a{color:#C6CBEE}
 .key[data-f="1"]{border-color:#2EE6A8}.key[data-f="2"]{border-color:#8B7CFF}.key[data-f="3"]{border-color:#F4B400}.key[data-f="4"]{border-color:#FF6B81}.key[data-f="5"]{border-color:#4CC3FF}
 .banner{display:none;background:rgba(139,124,255,.16);border:1.5px solid var(--vio);border-radius:14px;padding:13px 16px;margin-bottom:14px;font-weight:700}
 .banner.show{display:block}
-.race{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#171C38,#1D2347);border:1.5px solid var(--b1)}
-.lane{position:relative;height:54px;border-bottom:1.5px dashed var(--b2)}
-.lane:last-child{border-bottom:none}
-.lane .who{position:absolute;left:10px;top:17px;font-size:12px;font-weight:800;color:var(--mut);letter-spacing:.5px;z-index:2}
-.lane .fin{position:absolute;right:14px;top:6px;bottom:6px;width:5px;background:repeating-linear-gradient(180deg,#EDF0FF 0 8px,transparent 8px 16px);opacity:.45;border-radius:2px}
-.lane .car{position:absolute;top:9px;font-size:31px;transform:translateX(-50%);transition:left .22s linear;z-index:3}
-#rtext{font-size:clamp(19px,2.6vw,23px);line-height:1.9;font-family:ui-monospace,'Courier New',monospace;word-break:break-word;user-select:none}
-#rtext .u{color:var(--mut)}
-#rtext .c{color:var(--mint)}
-#rtext .w{color:var(--coral);text-decoration:underline}
-#rtext .cur{background:var(--vio);color:#0B0E20;border-radius:4px;animation:blink 1.1s steps(1) infinite}
+.zfield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
+.zfield .moon{position:absolute;top:12px;right:16px;font-size:26px;opacity:.9;z-index:1}
+.safeline{position:absolute;left:76px;top:0;bottom:0;border-left:3px dashed rgba(255,107,129,.45);z-index:1}
+.zbase{position:absolute;left:10px;bottom:40px;text-align:center;z-index:3}
+.zbase .bemo{font-size:42px;display:block;line-height:1.1;filter:drop-shadow(0 0 8px rgba(46,230,168,.35))}
+.zbase .blab{font-size:11px;font-weight:800;color:var(--mint);letter-spacing:1.5px}
+.zbase.shake{animation:shk .2s linear}
+.zomb{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
+.zomb .w{background:var(--panel);border:1.5px solid var(--vio);color:var(--txt);border-radius:9px;padding:2px 9px;font-family:ui-monospace,monospace;font-size:15px;font-weight:700;white-space:nowrap;margin-bottom:2px}
+.zomb .w span.c{color:var(--mint)}
+.zomb .w span.wr{color:var(--coral)}
+.zomb .emo{font-size:33px;display:block;line-height:1.1;animation:zwob .8s ease-in-out infinite alternate}
+.zomb.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
+@keyframes zwob{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+
 .spacefield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
 .star{position:absolute;background:#EDF0FF;border-radius:50%;opacity:.5}
 .ship{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
@@ -108,14 +112,28 @@ footer.site a{color:#C6CBEE}
 .ship .w span.c{color:var(--mint)}
 .ship .w span.wr{color:var(--coral)}
 .ship.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
-.pship{position:absolute;bottom:6px;transform:translateX(-50%);font-size:34px;transition:left .18s;z-index:2}
-.laser{position:absolute;width:3px;background:var(--mint);border-radius:2px;box-shadow:0 0 9px var(--mint);z-index:4}
+.pship{position:absolute;bottom:8px;transform:translateX(-50%);width:54px;transition:left .18s;z-index:3;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(46,230,168,.45))}
+.pship svg{display:block;width:100%;height:auto}
+.pship .flame{animation:flk .26s ease-in-out infinite alternate}
+.pship.shake{animation:shk .2s linear}
+@keyframes bob{0%,100%{margin-bottom:0}50%{margin-bottom:5px}}
+@keyframes flk{from{opacity:.5}to{opacity:1}}
+@keyframes shk{0%{margin-left:0}25%{margin-left:-4px}75%{margin-left:4px}100%{margin-left:0}}
+.laser{position:absolute;height:3px;background:linear-gradient(90deg,var(--mint),#EDF0FF);border-radius:2px;box-shadow:0 0 9px var(--mint);z-index:4;transform-origin:0 50%;pointer-events:none}
+.bolt{position:absolute;width:9px;height:9px;margin:-4px 0 0 -4px;border-radius:50%;background:#EDF0FF;box-shadow:0 0 10px 3px var(--mint);z-index:4;pointer-events:none}
+.boom{position:absolute;transform:translate(-50%,-50%);z-index:6;pointer-events:none}
+.boom .flash{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px;border-radius:50%;background:#fff;box-shadow:0 0 26px 13px rgba(255,190,60,.85);animation:flashA .45s ease-out forwards}
+.boom .part{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3px;border-radius:2px;animation:partA .55s ease-out forwards}
+.boom .bl{position:absolute;left:50%;top:50%;font-family:ui-monospace,monospace;font-weight:900;font-size:17px;color:#FFD34D;text-shadow:0 0 8px rgba(255,107,129,.85);animation:blA .6s ease-out forwards}
+@keyframes flashA{from{transform:scale(.4);opacity:1}to{transform:scale(2.7);opacity:0}}
+@keyframes partA{from{transform:translate(0,0) rotate(0deg);opacity:1}to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+@keyframes blA{from{transform:translate(-50%,-50%) scale(1);opacity:1}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3) rotate(var(--rot));opacity:0}}
 .bigword{font-size:clamp(38px,8vw,64px);font-weight:900;letter-spacing:2px;text-align:center;padding:26px 0;font-family:ui-monospace,monospace}
 .hearts{font-size:20px;letter-spacing:3px}
 ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 .small{font-size:13.5px;color:var(--mut)}
 .center{text-align:center}
 @media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}}
-</style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap"><div class="hero"><h1>Terms of Use</h1></div><div class="card"><p style='margin-bottom:12px;color:#DDE3FF'>Fast Typing Practice is provided free of charge for personal learning and job-test preparation. You may use the tests, lessons and games as often as you like.</p><p style='margin-bottom:12px;color:#DDE3FF'>Typing results shown on this site are practice estimates based on the standard 5-characters-per-word method. They are not official certificates and are not accepted by employers or exam bodies as proof of typing speed — official tests are conducted by the hiring organisations themselves.</p><p style='margin-bottom:12px;color:#DDE3FF'>The site is provided 'as is' without warranties of any kind. Speeds, targets and typical job requirements mentioned on this site are general guidance, not guarantees of employment or exam outcomes.</p><p style='margin-bottom:12px;color:#DDE3FF'>The games Typing Race, Space Shooter and Yaad Wala Game, and all text and design on this site, belong to Fast Typing Practice. Please do not copy the site wholesale; linking to it is always welcome.</p></div></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>
+</style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap"><div class="hero"><h1>Terms of Use</h1></div><div class="card"><p style='margin-bottom:12px;color:#DDE3FF'>Fast Typing Practice is provided free of charge for personal learning and job-test preparation. You may use the tests, lessons and games as often as you like.</p><p style='margin-bottom:12px;color:#DDE3FF'>Typing results shown on this site are practice estimates based on the standard 5-characters-per-word method. They are not official certificates and are not accepted by employers or exam bodies as proof of typing speed — official tests are conducted by the hiring organisations themselves.</p><p style='margin-bottom:12px;color:#DDE3FF'>The site is provided 'as is' without warranties of any kind. Speeds, targets and typical job requirements mentioned on this site are general guidance, not guarantees of employment or exam outcomes.</p><p style='margin-bottom:12px;color:#DDE3FF'>The games Zombie Hamla, Space Shooter and Yaad Wala Game, and all text and design on this site, belong to Fast Typing Practice. Please do not copy the site wholesale; linking to it is always welcome.</p></div></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>
 <p style="margin-top:8px">Fast Typing Practice — free typing tests, lessons and games in 5 languages. No sign-up, ever. Your results are stored only in your own browser.</p>
 <p style="margin-top:6px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p></div></footer></body></html>
