@@ -112,9 +112,9 @@ footer.site a{color:#C6CBEE}
 .ship .w span.c{color:var(--mint)}
 .ship .w span.wr{color:var(--coral)}
 .ship.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
-.pship{position:absolute;bottom:8px;transform:translateX(-50%);width:54px;transition:left .18s;z-index:3;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(46,230,168,.45))}
-.pship svg{display:block;width:100%;height:auto}
-.pship .flame{animation:flk .26s ease-in-out infinite alternate}
+.pship{position:absolute;bottom:6px;transform:translateX(-50%);width:170px;transition:left .18s;z-index:3;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 10px 16px rgba(46,230,168,.35))}
+.pship img{display:block;width:100%;height:auto}
+.pship::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:64%;height:18px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(46,230,168,.55),rgba(46,230,168,0) 70%);z-index:-1;pointer-events:none}
 .pship.shake{animation:shk .2s linear}
 @keyframes bob{0%,100%{margin-bottom:0}50%{margin-bottom:5px}}
 @keyframes flk{from{opacity:.5}to{opacity:1}}
@@ -133,7 +133,7 @@ footer.site a{color:#C6CBEE}
 ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 .small{font-size:13.5px;color:var(--mut)}
 .center{text-align:center}
-@media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}}
+@media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}.pship{width:135px}}
 </style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
 <div class="hero"><h1>Free Typing <span class="m">Certificate</span></h1><p>Take a free typing test, enter your name on the result, and download a certificate with your WPM, accuracy and level — free, with no sign-up.</p></div>
 <div class="card" style="margin-bottom:16px"><h2 class="sec">What Is This Certificate?</h2>

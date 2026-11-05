@@ -112,9 +112,9 @@ footer.site a{color:#C6CBEE}
 .ship .w span.c{color:var(--mint)}
 .ship .w span.wr{color:var(--coral)}
 .ship.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
-.pship{position:absolute;bottom:8px;transform:translateX(-50%);width:54px;transition:left .18s;z-index:3;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(46,230,168,.45))}
-.pship svg{display:block;width:100%;height:auto}
-.pship .flame{animation:flk .26s ease-in-out infinite alternate}
+.pship{position:absolute;bottom:6px;transform:translateX(-50%);width:170px;transition:left .18s;z-index:3;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 10px 16px rgba(46,230,168,.35))}
+.pship img{display:block;width:100%;height:auto}
+.pship::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:64%;height:18px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(46,230,168,.55),rgba(46,230,168,0) 70%);z-index:-1;pointer-events:none}
 .pship.shake{animation:shk .2s linear}
 @keyframes bob{0%,100%{margin-bottom:0}50%{margin-bottom:5px}}
 @keyframes flk{from{opacity:.5}to{opacity:1}}
@@ -133,11 +133,11 @@ footer.site a{color:#C6CBEE}
 ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 .small{font-size:13.5px;color:var(--mut)}
 .center{text-align:center}
-@media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}}
+@media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}.pship{width:135px}}
 </style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
 <div class="hero"><h1>🧠 Yaad Wala <span class="m">Game</span></h1><p>A word appears for just 3 seconds — then it vanishes. Type it from memory. 10 rounds; words get longer and the flash gets shorter. How strong is your memory?</p></div>
 <div class="card center">
-<div class="stats" style="margin-bottom:6px"><div class="stat"><div class="lab">ROUND</div><div class="val"><span id="rd">0</span> / 10</div></div><div class="stat"><div class="lab">SCORE</div><div class="val mint" id="sc">0</div></div></div>
+<div class="stats" style="margin-bottom:6px"><div class="stat"><div class="lab">ROUND</div><div class="val"><span id="rd">0</span> / 10</div></div><div class="stat"><div class="lab">SCORE</div><div class="val mint" id="sc">0</div></div><div class="stat"><div class="lab">SHOW TIME</div><div class="val" id="st">3.0s</div></div></div>
 <div class="bigword" id="big">Ready?</div>
 <p id="feed" style="min-height:26px;font-weight:700;color:#C6CBEE">Press Start. Look at the word carefully while it is on screen…</p>
 <button class="btn" id="start">▶ Start Game</button>
@@ -162,9 +162,9 @@ const W2=['apple','tiger','house','water','happy','cloud','piano','green','smile
 const W3=['banana','orange','window','garden','school','friend','purple','monkey','winter','silver'];
 const W4=['elephant','keyboard','practice','sunshine','tomorrow','language','champion','mountain','butterfly','adventure'];
 let round=0,score=0,cur='',phase='idle',typedN=0,correctRounds=0,timer1=null;
-function showTime(){return round<=3?3000:round<=6?2500:2000;}
+function showTime(){return Math.max(1200,3000-(round-1)*200);}
 function pool(){return round<=3?W1:round<=6?W2:round<=8?W3:W4;}
-function next(){round++;if(round>10){end();return;}$('rd').textContent=round;$('min').value='';$('min').disabled=true;$('feed').textContent='Memorise this word…';cur=pick(pool());$('big').textContent=cur;$('big').style.color='var(--txt)';phase='show';clearTimeout(timer1);timer1=setTimeout(()=>{$('big').textContent='• • • • •';$('feed').textContent='Now type the word from memory and press Enter:';$('min').disabled=false;$('min').focus();phase='type';},showTime());}
+function next(){round++;if(round>10){end();return;}$('rd').textContent=round;$('st').textContent=(showTime()/1000).toFixed(1)+'s';$('min').value='';$('min').disabled=true;$('feed').textContent='Memorise this word…';cur=pick(pool());$('big').textContent=cur;$('big').style.color='var(--txt)';phase='show';clearTimeout(timer1);timer1=setTimeout(()=>{$('big').textContent='• • • • •';$('feed').textContent='Now type the word from memory and press Enter:';$('min').disabled=false;$('min').focus();phase='type';},showTime());}
 function end(){phase='done';const rating=correctRounds>=9?'Photographic Memory!':correctRounds>=7?'Excellent Memory':correctRounds>=5?'Strong Memory':correctRounds>=3?'Growing Memory':'Memory in Training';const m=motivation(correctRounds*6,correctRounds*10);
 $('mres').innerHTML='<h2>Your Memory Score: '+score+'</h2><div class="stats"><div class="stat"><div class="lab">ROUNDS RIGHT</div><div class="val mint">'+correctRounds+' / 10</div></div><div class="stat"><div class="lab">MEMORY RATING</div><div class="val" style="font-size:19px">'+rating+'</div></div></div><div class="mot"><b>💚</b> '+(correctRounds>=7?'Superb! Your brain holds words like a camera. Memory plus typing is exactly what fast typists are made of.':'Nice game! Memory grows just like typing speed — a little daily play and those hidden words will start feeling easy.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button></div>';$('mres').classList.add('show');$('mres').scrollIntoView({behavior:'smooth',block:'center'});}
 function init(){$('start').onclick=()=>{$('start').style.display='none';next();};
