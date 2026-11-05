@@ -89,7 +89,7 @@ footer.site a{color:#C6CBEE}
 .key[data-f="1"]{border-color:#2EE6A8}.key[data-f="2"]{border-color:#8B7CFF}.key[data-f="3"]{border-color:#F4B400}.key[data-f="4"]{border-color:#FF6B81}.key[data-f="5"]{border-color:#4CC3FF}
 .banner{display:none;background:rgba(139,124,255,.16);border:1.5px solid var(--vio);border-radius:14px;padding:13px 16px;margin-bottom:14px;font-weight:700}
 .banner.show{display:block}
-.zfield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
+.zfield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
 .zfield .moon{position:absolute;top:12px;right:16px;font-size:26px;opacity:.9;z-index:1}
 .safeline{position:absolute;left:76px;top:0;bottom:0;border-left:3px dashed rgba(255,107,129,.45);z-index:1}
 .zbase{position:absolute;left:10px;bottom:40px;text-align:center;z-index:3}
@@ -104,7 +104,12 @@ footer.site a{color:#C6CBEE}
 .zomb.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
 @keyframes zwob{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
 
-.spacefield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.spacefield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.gstage:fullscreen,.gstage:-webkit-full-screen{width:100%;height:100%;background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;overflow-y:auto}
+.gstage:fullscreen .spacefield,.gstage:fullscreen .zfield,.gstage:-webkit-full-screen .spacefield,.gstage:-webkit-full-screen .zfield{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+.gstage:fullscreen .card,.gstage:-webkit-full-screen .card{flex:1 1 auto}
+.gstage:fullscreen .pship{width:190px}
+.gstage:fullscreen .bigword{font-size:clamp(48px,9vw,84px)}
 .star{position:absolute;background:#EDF0FF;border-radius:50%;opacity:.5}
 .ship{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
 .ship .emo{font-size:29px;display:block;line-height:1.1}
@@ -136,14 +141,17 @@ ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 @media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}.pship{width:135px}}
 </style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
 <div class="hero"><h1>🧠 Yaad Wala <span class="m">Game</span></h1><p>A word appears for just 3 seconds — then it vanishes. Type it from memory. 10 rounds; words get longer and the flash gets shorter. How strong is your memory?</p></div>
+<div class="gstage" id="mstage">
 <div class="card center">
 <div class="stats" style="margin-bottom:6px"><div class="stat"><div class="lab">ROUND</div><div class="val"><span id="rd">0</span> / 10</div></div><div class="stat"><div class="lab">SCORE</div><div class="val mint" id="sc">0</div></div><div class="stat"><div class="lab">SHOW TIME</div><div class="val" id="st">3.0s</div></div></div>
 <div class="bigword" id="big">Ready?</div>
 <p id="feed" style="min-height:26px;font-weight:700;color:#C6CBEE">Press Start. Look at the word carefully while it is on screen…</p>
 <button class="btn" id="start">▶ Start Game</button>
+<div style="margin-top:10px"><button class="btn ghost" id="mfs" type="button">⛶ Full Screen</button><div class="small" style="margin-top:6px">Tip: press Full Screen for the best experience.</div></div>
 <div style="margin-top:14px"><input id="min" type="text" disabled autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:min(420px,90%);font-size:20px;text-align:center" placeholder="Type the word, then press Enter"></div>
 </div>
 <div class="result" id="mres"></div>
+</div>
 <section><h2 class="sec">Why This Game Makes You Faster</h2><div class="card"><p style="color:#DDE3FF">Fast typists do not read letter by letter — they glance at a whole word and type it in one flow. The Yaad Wala Game trains exactly that: look once, hold the word in memory, and let your fingers do the rest. Play it daily and your reading-ahead speed in normal tests will jump too.</p></div></section><script>
 const $=id=>document.getElementById(id);
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -157,6 +165,8 @@ function makeCert(name,wpm,acc,level){const c=document.createElement('canvas');c
 function wireCert(prefix,st){const b=$(prefix+'cert');if(!b)return;b.onclick=()=>{let n=prompt('Your name for the certificate:','');if(n===null)return;n=n.trim()||'Typing Star';makeCert(n,st.wpm,st.acc,st.level);};}
 function wireChallenge(prefix,st){const b=$(prefix+'chal');if(!b)return;b.onclick=()=>{const nm=st.playerName||prompt('Your name (for the challenge link):','')||'A friend';const link=location.origin+location.pathname.replace(/[^\/]*$/,'')+'index.html?challenge='+encodeURIComponent(nm)+':'+st.wpm;const done=()=>{const t=$(prefix+'chalnote');if(t)t.textContent='Challenge link copied — send it to a friend!';};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(done).catch(()=>{prompt('Copy your challenge link:',link);done();});}else{prompt('Copy your challenge link:',link);done();}};}
 
+function wireFS(btnId,stageId){const b=$(btnId),st=$(stageId);if(!b||!st)return;function isFS(){return document.fullscreenElement===st||document.webkitFullscreenElement===st;}function upd(){b.textContent=isFS()?'⛶ Exit Full Screen':'⛶ Full Screen';}b.onclick=function(){if(isFS()){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}else if(st.requestFullscreen){const p=st.requestFullscreen();if(p&&p.catch)p.catch(function(){});}else if(st.webkitRequestFullscreen){st.webkitRequestFullscreen();}};document.addEventListener('fullscreenchange',upd);document.addEventListener('webkitfullscreenchange',upd);upd();}
+
 const W1=['cat','sun','tree','book','fish','bird','milk','star','hand','rain'];
 const W2=['apple','tiger','house','water','happy','cloud','piano','green','smile','light'];
 const W3=['banana','orange','window','garden','school','friend','purple','monkey','winter','silver'];
@@ -167,7 +177,7 @@ function pool(){return round<=3?W1:round<=6?W2:round<=8?W3:W4;}
 function next(){round++;if(round>10){end();return;}$('rd').textContent=round;$('st').textContent=(showTime()/1000).toFixed(1)+'s';$('min').value='';$('min').disabled=true;$('feed').textContent='Memorise this word…';cur=pick(pool());$('big').textContent=cur;$('big').style.color='var(--txt)';phase='show';clearTimeout(timer1);timer1=setTimeout(()=>{$('big').textContent='• • • • •';$('feed').textContent='Now type the word from memory and press Enter:';$('min').disabled=false;$('min').focus();phase='type';},showTime());}
 function end(){phase='done';const rating=correctRounds>=9?'Photographic Memory!':correctRounds>=7?'Excellent Memory':correctRounds>=5?'Strong Memory':correctRounds>=3?'Growing Memory':'Memory in Training';const m=motivation(correctRounds*6,correctRounds*10);
 $('mres').innerHTML='<h2>Your Memory Score: '+score+'</h2><div class="stats"><div class="stat"><div class="lab">ROUNDS RIGHT</div><div class="val mint">'+correctRounds+' / 10</div></div><div class="stat"><div class="lab">MEMORY RATING</div><div class="val" style="font-size:19px">'+rating+'</div></div></div><div class="mot"><b>💚</b> '+(correctRounds>=7?'Superb! Your brain holds words like a camera. Memory plus typing is exactly what fast typists are made of.':'Nice game! Memory grows just like typing speed — a little daily play and those hidden words will start feeling easy.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button></div>';$('mres').classList.add('show');$('mres').scrollIntoView({behavior:'smooth',block:'center'});}
-function init(){$('start').onclick=()=>{$('start').style.display='none';next();};
+function init(){wireFS('mfs','mstage');$('start').onclick=()=>{$('start').style.display='none';next();};
 $('min').addEventListener('keydown',e=>{if(e.key!=='Enter'||phase!=='type')return;const v=$('min').value.trim().toLowerCase();phase='check';if(v===cur.toLowerCase()){const pts=cur.length*2+(round>6?10:round>3?5:0);score+=pts;correctRounds++;$('sc').textContent=score;$('big').textContent='✅ '+cur;$('big').style.color='var(--mint)';$('feed').textContent='Correct! +'+pts+' points';}else{$('big').textContent=cur;$('big').style.color='var(--coral)';$('feed').textContent='Not quite — the word was "'+cur+'". Look carefully, it will stick next time.';}setTimeout(next,1500);});}
 document.addEventListener('DOMContentLoaded',init);
 </script></main><footer class="site"><div class="wrap"><p><a href="index.html">Home</a> · <a href="lessons.html">Lessons</a> · <a href="job-test.html">Job Test</a> · <a href="games.html">Games</a> · <a href="tips.html">Tips</a> · <a href="practice.html">Practice</a> · <a href="urdu-typing-test.html">Urdu Test</a> · <a href="hindi-typing-test.html">Hindi Test</a> · <a href="arabic-typing-test.html">Arabic Test</a> · <a href="spanish-typing-test.html">Spanish Test</a> · <a href="certificate.html">Certificate</a></p>

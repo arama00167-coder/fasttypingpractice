@@ -89,7 +89,7 @@ footer.site a{color:#C6CBEE}
 .key[data-f="1"]{border-color:#2EE6A8}.key[data-f="2"]{border-color:#8B7CFF}.key[data-f="3"]{border-color:#F4B400}.key[data-f="4"]{border-color:#FF6B81}.key[data-f="5"]{border-color:#4CC3FF}
 .banner{display:none;background:rgba(139,124,255,.16);border:1.5px solid var(--vio);border-radius:14px;padding:13px 16px;margin-bottom:14px;font-weight:700}
 .banner.show{display:block}
-.zfield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
+.zfield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
 .zfield .moon{position:absolute;top:12px;right:16px;font-size:26px;opacity:.9;z-index:1}
 .safeline{position:absolute;left:76px;top:0;bottom:0;border-left:3px dashed rgba(255,107,129,.45);z-index:1}
 .zbase{position:absolute;left:10px;bottom:40px;text-align:center;z-index:3}
@@ -104,7 +104,12 @@ footer.site a{color:#C6CBEE}
 .zomb.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
 @keyframes zwob{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
 
-.spacefield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.spacefield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.gstage:fullscreen,.gstage:-webkit-full-screen{width:100%;height:100%;background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;overflow-y:auto}
+.gstage:fullscreen .spacefield,.gstage:fullscreen .zfield,.gstage:-webkit-full-screen .spacefield,.gstage:-webkit-full-screen .zfield{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+.gstage:fullscreen .card,.gstage:-webkit-full-screen .card{flex:1 1 auto}
+.gstage:fullscreen .pship{width:190px}
+.gstage:fullscreen .bigword{font-size:clamp(48px,9vw,84px)}
 .star{position:absolute;background:#EDF0FF;border-radius:50%;opacity:.5}
 .ship{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
 .ship .emo{font-size:29px;display:block;line-height:1.1}

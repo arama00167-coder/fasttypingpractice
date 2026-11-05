@@ -89,7 +89,7 @@ footer.site a{color:#C6CBEE}
 .key[data-f="1"]{border-color:#2EE6A8}.key[data-f="2"]{border-color:#8B7CFF}.key[data-f="3"]{border-color:#F4B400}.key[data-f="4"]{border-color:#FF6B81}.key[data-f="5"]{border-color:#4CC3FF}
 .banner{display:none;background:rgba(139,124,255,.16);border:1.5px solid var(--vio);border-radius:14px;padding:13px 16px;margin-bottom:14px;font-weight:700}
 .banner.show{display:block}
-.zfield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
+.zfield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#10142B 0%,#171C38 58%,#1C2B20 58.2%,#14231A 100%);border:1.5px solid var(--b1)}
 .zfield .moon{position:absolute;top:12px;right:16px;font-size:26px;opacity:.9;z-index:1}
 .safeline{position:absolute;left:76px;top:0;bottom:0;border-left:3px dashed rgba(255,107,129,.45);z-index:1}
 .zbase{position:absolute;left:10px;bottom:40px;text-align:center;z-index:3}
@@ -104,7 +104,12 @@ footer.site a{color:#C6CBEE}
 .zomb.target .w{border-color:var(--mint);box-shadow:0 0 12px rgba(46,230,168,.35)}
 @keyframes zwob{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
 
-.spacefield{position:relative;height:380px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.spacefield{position:relative;height:68vh;min-height:340px;max-height:620px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 125%,#232B5E 0%,#10142B 62%);border:1.5px solid var(--b1)}
+.gstage:fullscreen,.gstage:-webkit-full-screen{width:100%;height:100%;background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;overflow-y:auto}
+.gstage:fullscreen .spacefield,.gstage:fullscreen .zfield,.gstage:-webkit-full-screen .spacefield,.gstage:-webkit-full-screen .zfield{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+.gstage:fullscreen .card,.gstage:-webkit-full-screen .card{flex:1 1 auto}
+.gstage:fullscreen .pship{width:190px}
+.gstage:fullscreen .bigword{font-size:clamp(48px,9vw,84px)}
 .star{position:absolute;background:#EDF0FF;border-radius:50%;opacity:.5}
 .ship{position:absolute;transform:translateX(-50%);text-align:center;z-index:2}
 .ship .emo{font-size:29px;display:block;line-height:1.1}
@@ -136,10 +141,13 @@ ul.tips li{margin:0 0 8px 20px;color:#DDE3FF}
 @media (max-width:640px){.key{width:26px;height:32px;font-size:11px}.key.wide{width:40px}.key.space{width:130px}.navlinks a{padding:6px 8px;font-size:13.5px}.pship{width:135px}}
 </style></head><body><header class="site"><div class="wrap nav"><a class="logo" href="index.html">Fast<b>Typing</b>Practice</a><nav class="navlinks"><a href="index.html">Home</a><a href="lessons.html">Lessons</a><a href="job-test.html">Job Test</a><a href="games.html">Games</a><a href="tips.html">Tips</a><a href="practice.html">Practice</a><a href="about.html">About</a></nav></div></header><main class="wrap">
 <div class="hero"><h1>🧟 Zombie <span class="m">Hamla</span></h1><p>The zombies are coming — and every zombie carries a word. You are the last line of defence for your base on the left. Type a zombie's word to drop it before it crosses the dashed line. If one gets through, you lose a life — you have 3. Waves get faster, and the words get longer!</p></div>
+<div class="gstage" id="zstage">
 <div class="stats" style="margin-bottom:12px"><div class="stat"><div class="lab">SCORE</div><div class="val mint" id="zscore">0</div></div><div class="stat"><div class="lab">ZOMBIES STOPPED</div><div class="val" id="zkills">0</div></div><div class="stat"><div class="lab">WAVE</div><div class="val" id="zwave">1</div></div><div class="stat"><div class="lab">LIVES</div><div class="val hearts" id="zlives">❤️❤️❤️</div></div><div class="stat"><div class="lab">&nbsp;</div><button class="btn" id="zstart">▶ Start Game</button></div></div>
+<div style="margin-bottom:12px"><button class="btn ghost" id="zfs" type="button">⛶ Full Screen</button><div class="small" style="margin-top:6px">Tip: press Full Screen for the best experience.</div></div>
 <div class="zfield" id="zfield"><span class="moon">🌙</span><div class="safeline"></div><div class="zbase" id="zbase"><span class="bemo">🏠</span><span class="blab">YOU</span></div></div>
 <div style="margin-top:14px"><label class="fl">TYPE THE WORD ON A ZOMBIE</label><input id="zin" type="text" disabled autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:100%;font-size:20px" placeholder="Press Start, then type a zombie's word to stop it…"></div>
 <div class="result" id="zres"></div>
+</div>
 <section><h2 class="sec">How to Play</h2><div class="card"><ul class="tips">
 <li>Zombies walk in from the right, each carrying a word. Start typing a zombie's word — your defender locks onto it.</li>
 <li>Finish the word correctly and the zombie falls in a burst of letters — points for every letter, plus a bonus for longer words.</li>
@@ -157,6 +165,8 @@ function makeCert(name,wpm,acc,level){const c=document.createElement('canvas');c
 function wireCert(prefix,st){const b=$(prefix+'cert');if(!b)return;b.onclick=()=>{let n=prompt('Your name for the certificate:','');if(n===null)return;n=n.trim()||'Typing Star';makeCert(n,st.wpm,st.acc,st.level);};}
 function wireChallenge(prefix,st){const b=$(prefix+'chal');if(!b)return;b.onclick=()=>{const nm=st.playerName||prompt('Your name (for the challenge link):','')||'A friend';const link=location.origin+location.pathname.replace(/[^\/]*$/,'')+'index.html?challenge='+encodeURIComponent(nm)+':'+st.wpm;const done=()=>{const t=$(prefix+'chalnote');if(t)t.textContent='Challenge link copied — send it to a friend!';};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(done).catch(()=>{prompt('Copy your challenge link:',link);done();});}else{prompt('Copy your challenge link:',link);done();}};}
 
+function wireFS(btnId,stageId){const b=$(btnId),st=$(stageId);if(!b||!st)return;function isFS(){return document.fullscreenElement===st||document.webkitFullscreenElement===st;}function upd(){b.textContent=isFS()?'⛶ Exit Full Screen':'⛶ Full Screen';}b.onclick=function(){if(isFS()){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}else if(st.requestFullscreen){const p=st.requestFullscreen();if(p&&p.catch)p.catch(function(){});}else if(st.webkitRequestFullscreen){st.webkitRequestFullscreen();}};document.addEventListener('fullscreenchange',upd);document.addEventListener('webkitfullscreenchange',upd);upd();}
+
 const ZWORDS=[...new Set(window.FTP_DATA.langs.en.words.filter(w=>w.length>=3&&w.length<=11))];
 let zscore=0,zkills=0,zlives=3,zwave=1,ztypedN=0,zcorrectN=0,zplaying=false,zstartT=0,zombs=[],ztyped='',zactive=null,zlastSpawn=0,zlastT=0,zraf=null;
 function zSpeedMult(now){return Math.min(2,1+((now-zstartT)/1000)/60);}
@@ -171,7 +181,7 @@ function zReach(z){z.el.remove();zombs=zombs.filter(x=>x!==z);if(zactive===z)zSe
 function zLoop(now){if(!zplaying)return;const dt=Math.min(0.05,(now-zlastT)/1000);zlastT=now;zwave=1+Math.floor((now-zstartT)/25000);const zm=zSpeedMult(now);const zSpawnInt=Math.max(850,2300-(zwave-1)*180-Math.min(450,((now-zstartT)/1000)*4.5));if(now-zlastSpawn>zSpawnInt)zSpawn(now);const copy=zombs.slice();for(const z of copy){z.x-=z.vx*dt*zm;z.el.style.left=z.x+'px';if(z.x<=86){zReach(z);if(!zplaying)return;}}zUpdHUD();zraf=requestAnimationFrame(zLoop);}
 function zGameOver(){zplaying=false;cancelAnimationFrame(zraf);$('zin').disabled=true;const mins=Math.max((performance.now()-zstartT)/60000,0.05);const estWpm=Math.round((zcorrectN/5)/mins);const acc=ztypedN?Math.round(zcorrectN/ztypedN*100):100;const m=motivation(estWpm,acc);
 $('zres').innerHTML='<h2>The Zombies Got In — Final Score: '+zscore+'</h2><div class="stats"><div class="stat"><div class="lab">ZOMBIES STOPPED</div><div class="val mint">'+zkills+'</div></div><div class="stat"><div class="lab">ACCURACY</div><div class="val">'+acc+'%</div></div><div class="stat"><div class="lab">WAVE REACHED</div><div class="val">'+zwave+'</div></div><div class="stat"><div class="lab">YOUR SPEED</div><div class="val">'+estWpm+' WPM</div></div></div><div class="mot"><b>💚</b> '+m.msg+'</div><div class="mot"><b>💡</b> '+(acc<90?'Your tip: finish one zombie\'s whole word before starting another — half-typed words let zombies through the line.':'Your tip: always stop the zombie closest to your base first. The nearest zombie is the real danger, not the one that just appeared.')+'</div><div class="chips" style="margin-top:10px"><button class="btn" onclick="location.reload()">↻ Play Again</button><a class="btn ghost" href="games.html">All Games</a></div>';$('zres').classList.add('show');$('zres').scrollIntoView({behavior:'smooth',block:'center'});}
-function zInit(){const f=$('zfield');for(let i=0;i<30;i++){const st=document.createElement('span');st.className='star';const sz=(Math.random()*2+1.5).toFixed(1);st.style.width=sz+'px';st.style.height=sz+'px';st.style.left=(Math.random()*98)+'%';st.style.top=(Math.random()*48)+'%';f.appendChild(st);}zUpdHUD();f.addEventListener('click',()=>{if(zplaying)$('zin').focus();});
+function zInit(){wireFS('zfs','zstage');const f=$('zfield');for(let i=0;i<30;i++){const st=document.createElement('span');st.className='star';const sz=(Math.random()*2+1.5).toFixed(1);st.style.width=sz+'px';st.style.height=sz+'px';st.style.left=(Math.random()*98)+'%';st.style.top=(Math.random()*48)+'%';f.appendChild(st);}zUpdHUD();f.addEventListener('click',()=>{if(zplaying)$('zin').focus();});
 $('zstart').onclick=()=>{$('zstart').style.display='none';$('zin').disabled=false;$('zin').focus();zplaying=true;zstartT=performance.now();zlastT=zstartT;zSpawn(zstartT);zraf=requestAnimationFrame(zLoop);};
 $('zin').addEventListener('input',e=>{if(!zplaying)return;const v=e.target.value;e.target.value='';for(const ch of v){if(ch===' ')continue;ztypedN++;if(!zactive){const cands=zombs.filter(z=>z.word[0]===ch);if(cands.length){const t=cands.reduce((a,b)=>a.x<b.x?a:b);zSetActive(t);ztyped=ch;zcorrectN++;zRender(t);if(ztyped===t.word)zDestroy(t);}}else if(ch===zactive.word[ztyped.length]){ztyped+=ch;zcorrectN++;zRender(zactive);if(ztyped===zactive.word)zDestroy(zactive);}else{zRender(zactive);}}});}
 document.addEventListener('DOMContentLoaded',zInit);
